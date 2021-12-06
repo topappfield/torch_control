@@ -1,6 +1,7 @@
 package com.topappfield.torch_control
 
 import android.content.Context
+import android.graphics.Camera
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.os.Build
@@ -9,17 +10,27 @@ import androidx.annotation.RequiresApi
 @RequiresApi(Build.VERSION_CODES.M)
 class TorchControlB(context: Context) : TorchControl() {
     private val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
-    private val cameraId = cameraManager.cameraIdList.first {
-        id -> cameraManager.getCameraCharacteristics(id)[CameraCharacteristics.FLASH_INFO_AVAILABLE] != null
-    } ?: null
+    private var cameraId: String? = null
 
-    override fun release() {}
+    override fun acquire(): Boolean {
+        cameraId = cameraManager.cameraIdList.first { id ->
+            cameraManager.getCameraCharacteristics(id)[CameraCharacteristics.FLASH_INFO_AVAILABLE] == true
+        } ?: null
+        return cameraId != null
+    }
 
-    override fun hasTorch(): Boolean = cameraId != null
+    override fun release() {
+        cameraId = null
+    }
+
+    override fun ready(): Boolean {
+        if (cameraId != null) return true
+        return acquire()
+    }
 
     override fun turn(state: Boolean): Boolean {
-        if (cameraId == null) return false
-        cameraManager.setTorchMode(cameraId, state)
+        cameraManager.setTorchMode(cameraId!!, state)
         return state
     }
 }
+

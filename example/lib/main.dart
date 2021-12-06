@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:torch_control/torch_control.dart';
 
 void main() {
@@ -14,22 +13,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool hasTorch = false;
-  bool isOn = true;
-  bool isOff = true;
+  bool torchReady = false;
 
   @override
   void initState() {
     super.initState();
-    checkState();
+    checkTorch();
   }
 
-  void checkState() async {
-    hasTorch = await TorchControl.hasTorch;
-    setState(() {
-      isOn = TorchControl.isOn;
-      isOff = TorchControl.isOff;
-    });
+  void checkTorch() async {
+    torchReady = await TorchControl.ready();
+  }
+
+  void checkState() {
+    setState(() {});
   }
 
   @override
@@ -42,9 +39,9 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: [
-              Text('hasTorch: $hasTorch\n'),
-              Text('isOn: $isOn\n'),
-              Text('isOff: $isOff\n'),
+              Text('ready: $torchReady\n'),
+              Text('isOn: ${TorchControl.isOn}\n'),
+              Text('isOff: ${TorchControl.isOff}\n'),
               TextButton(
                   onPressed: () {
                     TorchControl.turnOn();
@@ -65,10 +62,11 @@ class _MyAppState extends State<MyApp> {
                   child: const Text('Toggle')),
               TextButton(
                   onPressed: () {
-                    TorchControl.flash(const Duration(seconds: 1));
+                    TorchControl.flash(const Duration(seconds: 1))
+                        .whenComplete(checkState);
                     checkState();
                   },
-                  child: const Text('Flash')),
+                  child: const Text('Flash for 1 s')),
             ],
           ),
         ),

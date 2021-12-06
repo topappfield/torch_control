@@ -5,8 +5,9 @@ import 'package:flutter/services.dart';
 class TorchControl {
   static const MethodChannel _channel = MethodChannel('torch_control');
 
-  static Future<bool> get hasTorch async =>
-      await _channel.invokeMethod('hasTorch');
+  static Future<bool> ready() async {
+    return await _channel.invokeMethod('ready');
+  }
 
   static bool _isOn = false;
 
@@ -21,10 +22,10 @@ class TorchControl {
 
   static Future<bool> turnOn() async => turn(true);
 
-  static Future<void> turnOff() async => turn(false);
+  static Future<bool> turnOff() async => turn(false);
 
   static Future<bool> toggle() async => turn(!isOn);
 
-  static Future flash(Duration duration) =>
-      turnOn().whenComplete(() => Future.delayed(duration, () => turnOff()));
+  static Future<void> flash(Duration duration) =>
+      turnOn().whenComplete(() => Future.delayed(duration, turnOff));
 }

@@ -6,11 +6,19 @@ A Flutter plugin for torch/flashlight/lamp control. Includes support for Android
 
 Add  `torch_control: 0.1.0` to your pubspec.yaml file
 
+Set permissions
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+
 ## Usage
 
-To check if a torch is available:
+To check if a torch is available and ready to use:
 
-    bool hasTorch = TorchControl.hasTorch();
+    await TorchControl.ready();
 
 To turn on and off the torch:
 
@@ -28,8 +36,12 @@ To check the torch state:
     TorchControl.isOn();
     TorchControl.isOff();
 
-* In the beginning the torch state is initialized to off. To ensure correctness
-    you should call `TorchControl.turnOff()`.
+* In the beginning the torch state is initialized to off. To ensure correctness of the on/off status
+    you should call `TorchControl.turnOff()` (or `TorchControl.turnOn()`) somewhere at the beginning.
+
+To flash the torch for a given duration:
+
+    TorchControl.flash(const Duration(seconds: 1));
 
 ## Trivia
 
