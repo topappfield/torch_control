@@ -1,12 +1,21 @@
 # torch_control
 
-A Flutter plugin for torch/flashlight/lamp control. Includes support for Android (4 and 5+) and iOS.
+A Flutter plugin for torch/flashlight/lamp control. Offers API for:
+* checking if torch is available
+* turning the torch on and off
+* toggling the torch
+* flashing the torch for a given duration
+
+Platforms supported by the plugin:
+* Android old API levels 16 to 19 (4.1 to 4.4) via android.hardware.Camera
+* Android API levels 21 to 31 (5.+) via android.hardware.camera2
+* iOS (currently untested)
 
 ## Install
 
-Add  `torch_control: 0.1.0` to your pubspec.yaml file
+Add  `torch_control: 0.2.0` to your pubspec.yaml file
 
-Set permissions
+Set permissions for Android
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
@@ -45,5 +54,4 @@ To flash the torch for a given duration:
 
 ## Trivia
 
-Why yet another torch plugin? I needed support for null safety, Dart 2, and a bit more
-flexible interface. Moreover, I've never written a Flutter plugin as well as Kotlin code before.
+Why yet another torch plugin? I needed a simple plugin for controlling the torch with the support for null safety, Dart 2, and a bit more flexible interface which was not readily available at the time. Moreover, I've never written a Flutter plugin as well as any Kotlin code before.
