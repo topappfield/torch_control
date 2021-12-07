@@ -44,29 +44,26 @@ class _MyAppState extends State<MyApp> {
               Text('isOff: ${TorchControl.isOff}\n'),
               TextButton(
                   onPressed: () {
-                    TorchControl.turnOn();
-                    checkState();
+                    TorchControl.turnOn().whenComplete(checkState);
                   },
                   child: const Text('On')),
               TextButton(
                   onPressed: () {
-                    TorchControl.turnOff();
-                    checkState();
+                    TorchControl.turnOff().whenComplete(checkState);
                   },
                   child: const Text('Off')),
               TextButton(
                   onPressed: () {
-                    TorchControl.toggle();
-                    checkState();
+                    TorchControl.toggle().whenComplete(checkState);
                   },
                   child: const Text('Toggle')),
               TextButton(
                   onPressed: () {
-                    TorchControl.flash(const Duration(seconds: 1))
-                        .whenComplete(checkState);
+                    TorchControl.flash(const Duration(seconds: 1)).whenComplete(checkState);
                     checkState();
                   },
                   child: const Text('Flash for 1 s')),
+              TextButton(onPressed: checkState, child: const Text('Refresh UI')),
             ],
           ),
         ),
