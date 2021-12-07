@@ -17,19 +17,16 @@ class TorchControlA(private val context: Context) : TorchControl() {
         camera = try {
             Camera.open()
         } catch (e: Exception) {
+            System.err.println("Camera acquire failed: " + e.toString());
             null
         }
         if (camera == null) return false
         // check parameters
-        var result = (camera!!.parameters.flashMode != null)
-        // check flash modes
-        val modes = camera!!.parameters.supportedFlashModes
-        result = result && modes != null && modes.isNotEmpty()
-        result = result && !modes[0].equals(Camera.Parameters.FLASH_MODE_OFF)
+        val params = camera!!.parameters
+        var result = params?.flashMode != null
         // return
         if (!result) release()
         return result;
-        return true
     }
 
     override fun release() {
@@ -43,7 +40,12 @@ class TorchControlA(private val context: Context) : TorchControl() {
     }
 
     override fun turn(state: Boolean): Boolean {
-        camera!!.parameters.flashMode = if (state) Camera.Parameters.FLASH_MODE_TORCH else Camera.Parameters.FLASH_MODE_OFF
+        if (!ready()) return false;
+        // important to do getParameters and then setParameters
+        val params = camera?.parameters
+        params?.flashMode = if (state) Camera.Parameters.FLASH_MODE_TORCH else Camera.Parameters.FLASH_MODE_OFF
+        camera!!.parameters = params
+        // start/stop the camera
         if (state) camera!!.startPreview() else camera!!.stopPreview()
         return state
     }
