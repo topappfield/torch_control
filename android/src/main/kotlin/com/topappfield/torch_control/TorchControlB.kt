@@ -16,6 +16,8 @@ class TorchControlB(context: Context) : TorchControl() {
         cameraId = cameraManager.cameraIdList.first { id ->
             cameraManager.getCameraCharacteristics(id)[CameraCharacteristics.FLASH_INFO_AVAILABLE] == true
         } ?: null
+        if (cameraId == null)
+            System.err.println("Camera acquire failed.");
         return cameraId != null
     }
 
@@ -29,6 +31,7 @@ class TorchControlB(context: Context) : TorchControl() {
     }
 
     override fun turn(state: Boolean): Boolean {
+        if (!this.ready()) return false;
         cameraManager.setTorchMode(cameraId!!, state)
         return state
     }
