@@ -1,7 +1,6 @@
 package com.topappfield.torch_control
 
 import android.content.Context
-import android.graphics.Camera
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.os.Build
