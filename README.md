@@ -52,6 +52,14 @@ To flash the torch for a given duration:
 
     TorchControl.flash(const Duration(seconds: 1));
 
+## Examples
+
+See the companion example for demonstration on how to use the plugin.
+
+There are two of my apps in PlayStore that use this plugin:
+* [Flashlight Torcher](https://play.google.com/store/apps/details?id=com.topappfield.torcher) - Yet another torch/flashlight/lamp app with [source code available](https://github.com/topappfield/torcher).
+* [Count On Me](https://play.google.com/store/apps/details?id=com.topappfield.CountOnMe) - A tally counter app with many options, advanced features, statistics, and various methods of counting.
+
 ## Trivia
 
 Why yet another torch plugin? I needed a simple plugin for controlling the torch with the support for null safety, Dart 2, and a bit more flexible interface which was not readily available at the time. Moreover, I've never written a Flutter plugin as well as any Kotlin code before.
