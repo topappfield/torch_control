@@ -2,6 +2,10 @@
 
 Demonstrates how to use the torch_control plugin.
 
-## Getting Started
+## Usage
 
-![flutter_01.png]
+Tap/click on labels to change flashlight state.
+
+## Screenshot
+
+![](flutter_01.png)
