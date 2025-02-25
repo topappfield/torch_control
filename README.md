@@ -1,6 +1,6 @@
 # torch_control
 
-A Flutter plugin for torch/flashlight/lamp control. Offers API for:
+A Flutter plugin for torch/flashlight/lamp control. It offers API for:
 * checking if torch is available
 * turning the torch on and off
 * toggling the torch
@@ -13,7 +13,7 @@ Platforms supported by the plugin:
 
 ## Install
 
-Add  `torch_control: 0.2.0` to your pubspec.yaml file
+Add  `torch_control: 0.4.0` to your pubspec.yaml file
 
 Set permissions for Android
 
