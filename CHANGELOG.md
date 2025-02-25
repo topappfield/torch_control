@@ -1,3 +1,7 @@
+## 0.4.0
+
+* Update of the tooling (gradle, kotlin, java) versions and configuration files
+
 ## 0.3.0
 
 * Add: dart doc comments
