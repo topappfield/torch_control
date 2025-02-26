@@ -4,7 +4,7 @@ version: 0.4.0
 homepage: https://github.com/topappfield/torch_control
 
 environment:
-  sdk: ">=2.15.0"
+  sdk: ">=2.15.0 <3.8.0"
   flutter: ">=2.5.0"
 
 dependencies:
