@@ -8,7 +8,7 @@ A Flutter plugin for torch/flashlight/lamp control. It offers API for:
 
 Platforms supported by the plugin:
 * Android old API levels 16 to 19 (4.1 to 4.4) via android.hardware.Camera
-* Android API levels 21 to 31 (5.+) via android.hardware.camera2
+* Android API levels 21 to 35 (5.+) via android.hardware.camera2
 * iOS (currently untested)
 
 ## Install
